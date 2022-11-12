@@ -122,9 +122,12 @@ fi
 
 alias vi="gvim"
 alias py="python3"
-alias launch_recognition="roslaunch mir_object_recognition multimodal_object_recognition.launch"
-alias event_in="rostopic pub -1 /mir_perception/multimodal_object_recognition/event_in std_msgs/String \"data: \'e_start'\""
-alias play_bag="rosbag play -l ~/work/b_it_bot_work/2d_object_detection/b_it_bot_dataset/bagfiles/2022-04-26-15-37-47.bag"
+
+# BELOW alias is for mir_object_recognition package
+# alias launch_recognition="roslaunch mir_object_recognition multimodal_object_recognition.launch"
+# alias event_in="rostopic pub -1 /mir_perception/multimodal_object_recognition/event_in std_msgs/String \"data: \'e_start'\""
+# alias play_bag="rosbag play -l -q ~/work/b_it_bot_work/2d_object_detection/b_it_bot_dataset/bagfiles/2022-04-26-15-37-47.bag"
+# alias play_bag_2="rosbag play -l -q ~/work/b_it_bot_work/2d_object_detection/b_it_bot_dataset/summer_competition_22_dataset/bagfiles_ss22_dataset_local_competition/2022-08-31-10-06-58.bag"
 
 # source bashrc
 alias sb='source $HOME/.bashrc'
@@ -166,8 +169,9 @@ alias tskynet='tmux new -A -s skynet'
 alias tmisc='tmux new -A -s misc'
 alias tls='tmux ls'
 
-
-
+# git status
+alias st='git status'
+alias br='git branch -a'
 
 #ROS 1 and ROS 2 environment setup
 
@@ -177,18 +181,22 @@ source /opt/ros/noetic/setup.bash
 
 
 # >>> conda initialize >>>
+# The base environment is not activated by default
+
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/kvnptl/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/kvnptl/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/kvnptl/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/kvnptl/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/kvnptl/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/kvnptl/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/kvnptl/miniconda3/bin:$PATH"
+        export PATH="/home/kvnptl/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
+
+conda config --set auto_activate_base False
 # <<< conda initialize <<<
 
 
@@ -198,7 +206,7 @@ alias sourceme="source devel/setup.bash"
 #alias my_ros_melodic_docker="sudo docker run -it --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --mount type=bind,source="/home/kvnptl/work/docker_volumes/my_ros_melodic_image/home/.",target=/home --name="kevin_ros_melodic_container" my_ros_melodic_image"
 
 alias bitbots="cd ~/work/b_it_bots_ws"
-source ~/work/b_it_bots_ws/devel/setup.bash
+# source ~/work/b_it_bots_ws/devel/setup.bash
 
 # For Udemy ROS course
 #alias udemy="cd ~/work/ros_udemy_course/catkin_ws"
@@ -210,16 +218,29 @@ source ~/work/b_it_bots_ws/devel/setup.bash
 
 #HEART-MET project
 alias heartmet="cd ~/work/heart_met_competition/heart_met_ws"
+alias lucy_ws="cd ~/work/lucy_ws"
 
 ## connect to HSR robot
-alias hsr_export_ros="export ROS_MASTER_URI=http://192.168.50.201:11311 && export ROS_IP=192.168.50.52"
+alias lucy_export="export ROS_MASTER_URI=http://192.168.50.201:11311 && export ROS_IP=192.168.50.52"#alias lucy_export_ethernet="export ROS_MASTER_URI=http://10.255.255.1:11311 && export ROS_IP=192.168.50.52"
+alias lucy_connect="ssh -X lucy@192.168.50.201"
+alias lucy_connect_ethernet="ssh -X lucy@10.255.255.1"
+
+alias lucy_laptop_export="export ROS_MASTER_URI=http://192.168.0.216:11311 && export ROS_IP=192.168.0.217"
+alias tiago_export="export ROS_MASTER_URI=http://192.168.1.126:11311 && export ROS_IP=192.168.1.183"
+
+# Harrington HSR robot
+#alias lucy_export_ethernet="export ROS_MASTER_URI=http://10.255.255.1:11311 && export ROS_IP=192.168.50.52"
+#alias lucy_export="export ROS_MASTER_URI=http://192.168.1.122:11311 && export ROS_IP=192.168.1.183"
+#alias lucy_export_ethernet="export ROS_MASTER_URI=http://192.168.1.122:11311 && export ROS_IP=192.168.1.204"
+
+#alias refbox="export ROS_IP=10.109.204.127"
 #export ROBOT=youbot-brsu-4
 #export ROBOT_ENV=brsu-c025-sim
 
 # connect to youBot with fixed camera mount
-alias ybr2="ssh -X robocup@192.168.1.114"
-alias ybr4="ssh -X robocup@192.168.1.142"
-alias youbot_export="export ROS_MASTER_URI=http://192.168.1.114:11311"
+alias yb2_connect="ssh -X robocup@192.168.1.114"
+alias yb4_connect="ssh -X robocup@192.168.1.142"
+alias yb2_export="export ROS_MASTER_URI=http://192.168.1.114:11311"
 
 # lock from PC
 #alias lock="gnome-screensaver-command -a"
@@ -241,3 +262,5 @@ fi
 unset color_prompt force_color_prompt
 
 
+# my catkin workspace
+#source ~/work/catkin_ws/devel/setup.bash
