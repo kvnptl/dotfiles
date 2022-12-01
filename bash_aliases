@@ -44,12 +44,16 @@ alias tls='tmux ls'
 alias sourceme="source devel/setup.bash"
 
 # connect to HSR robot
-alias hsr_export_ros="export ROS_MASTER_URI=http://192.168.50.201:11311 && export ROS_IP=192.168.50.52"
+alias lucy_export="export ROS_MASTER_URI=http://192.168.50.201:11311 && export ROS_IP=192.168.50.52"
+alias lucy_export_ethernet="export ROS_MASTER_URI=http://10.255.255.1:11311 && export ROS_IP=192.168.50.52"
+alias lucy_connect="ssh -X lucy@192.168.50.201"
+alias lucy_connect_ethernet="ssh -X lucy@10.255.255.1"
+alias lucy_laptop_export="export ROS_MASTER_URI=http://192.168.0.216:11311 && export ROS_IP=192.168.0.217"
 
 # connect to youBot with fixed camera mount
-alias ybr2="ssh -X robocup@192.168.1.114"
-alias ybr4="ssh -X robocup@192.168.1.142"
-alias youbot_export="export ROS_MASTER_URI=http://192.168.1.114:11311"
+alias yb2_connect="ssh -X robocup@192.168.1.114"
+alias yb4_connect="ssh -X robocup@192.168.1.142"
+alias yb2_export="export ROS_MASTER_URI=http://192.168.1.114:11311"
 
 # lock from PC
 #alias lock="gnome-screensaver-command -a"
@@ -59,5 +63,9 @@ alias uni_work_station_access="ssh -L 32025:10.20.118.78:32025 kpatel2s@home.inf
 
 # Git
 alias st="git status"
+alias br='git branch -a'
+
+# b-it-bots
+alias bitbots="cd ~/work/b_it_bots_ws"
 
 #alias my_ros_melodic_docker="sudo docker run -it --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --mount type=bind,source="/home/kvnptl/work/docker_volumes/my_ros_melodic_image/home/.",target=/home --name="kevin_ros_melodic_container" my_ros_melodic_image"
