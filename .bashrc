@@ -119,70 +119,17 @@ fi
 
 # <<< Below commands added by user Kevin Patel >>>
 
-
-alias vi="gvim"
-alias py="python3"
-
-# BELOW alias is for mir_object_recognition package
-# alias launch_recognition="roslaunch mir_object_recognition multimodal_object_recognition.launch"
-# alias event_in="rostopic pub -1 /mir_perception/multimodal_object_recognition/event_in std_msgs/String \"data: \'e_start'\""
-# alias play_bag="rosbag play -l -q ~/work/b_it_bot_work/2d_object_detection/b_it_bot_dataset/bagfiles/2022-04-26-15-37-47.bag"
-# alias play_bag_2="rosbag play -l -q ~/work/b_it_bot_work/2d_object_detection/b_it_bot_dataset/summer_competition_22_dataset/bagfiles_ss22_dataset_local_competition/2022-08-31-10-06-58.bag"
-
-# source bashrc
-alias sb='source $HOME/.bashrc'
-
-# colorise ls command
-alias ls='ls --color=auto'
-
-# colorise tree command
-alias tree='tree -C'
-
-# some ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# colorise grep commands
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-
 # combine cd and ls functions
 function cdls(){
     cd "$@" && ls
 }
 
-
-# parent directories aliases
-alias ..='cdls ..'
-alias ...='cdls ../..'
-alias ....='cdls ../../..'
-alias .....='cdls ../../../..'
-
-
-# tmux alias
-alias troscore='tmux new -A -s roscore'
-alias tbringup='tmux new -A -s bringup'
-alias tplanning_bringup='tmux new -A -s planning_bringup'
-alias tskynet='tmux new -A -s skynet'
-alias tmisc='tmux new -A -s misc'
-alias tls='tmux ls'
-
-# git status
-alias st='git status'
-alias br='git branch -a'
-
 #ROS 1 and ROS 2 environment setup
-
 source /opt/ros/noetic/setup.bash
-
 #source ~/ros2_foxy/install/local_setup.bash
-
 
 # >>> conda initialize >>>
 # The base environment is not activated by default
-
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/kvnptl/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
@@ -199,55 +146,6 @@ unset __conda_setup
 conda config --set auto_activate_base False
 # <<< conda initialize <<<
 
-
-# For b-it-bot lab
-#export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:/home/kvnptl/work/youBot_from_scratch/src/youbot_driver:\ /home/kvnptl/work/youBot_from_scratch/src/youbot_applications
-alias sourceme="source devel/setup.bash"
-#alias my_ros_melodic_docker="sudo docker run -it --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --mount type=bind,source="/home/kvnptl/work/docker_volumes/my_ros_melodic_image/home/.",target=/home --name="kevin_ros_melodic_container" my_ros_melodic_image"
-
-alias bitbots="cd ~/work/b_it_bots_ws"
-# source ~/work/b_it_bots_ws/devel/setup.bash
-
-# For Udemy ROS course
-#alias udemy="cd ~/work/ros_udemy_course/catkin_ws"
-#source ~/work/ros_udemy_course/catkin_ws/devel/setup.bash
-#export TURTLEBOT3_MODEL=waffle
-
-#export ROBOT=youbot-brsu-4
-#export ROBOT_ENV=brsu-c025-sim
-
-#HEART-MET project
-alias heartmet="cd ~/work/heart_met_competition/heart_met_ws"
-alias lucy_ws="cd ~/work/lucy_ws"
-
-## connect to HSR robot
-alias lucy_export="export ROS_MASTER_URI=http://192.168.50.201:11311 && export ROS_IP=192.168.50.52"#alias lucy_export_ethernet="export ROS_MASTER_URI=http://10.255.255.1:11311 && export ROS_IP=192.168.50.52"
-alias lucy_connect="ssh -X lucy@192.168.50.201"
-alias lucy_connect_ethernet="ssh -X lucy@10.255.255.1"
-
-alias lucy_laptop_export="export ROS_MASTER_URI=http://192.168.0.216:11311 && export ROS_IP=192.168.0.217"
-alias tiago_export="export ROS_MASTER_URI=http://192.168.1.126:11311 && export ROS_IP=192.168.1.183"
-
-# Harrington HSR robot
-#alias lucy_export_ethernet="export ROS_MASTER_URI=http://10.255.255.1:11311 && export ROS_IP=192.168.50.52"
-#alias lucy_export="export ROS_MASTER_URI=http://192.168.1.122:11311 && export ROS_IP=192.168.1.183"
-#alias lucy_export_ethernet="export ROS_MASTER_URI=http://192.168.1.122:11311 && export ROS_IP=192.168.1.204"
-
-#alias refbox="export ROS_IP=10.109.204.127"
-#export ROBOT=youbot-brsu-4
-#export ROBOT_ENV=brsu-c025-sim
-
-# connect to youBot with fixed camera mount
-alias yb2_connect="ssh -X robocup@192.168.1.114"
-alias yb4_connect="ssh -X robocup@192.168.1.142"
-alias yb2_export="export ROS_MASTER_URI=http://192.168.1.114:11311"
-
-# lock from PC
-#alias lock="gnome-screensaver-command -a"
-
-# to access at-work lab PC from home
-alias uni_work_station_access="ssh -L 32025:10.20.118.78:32025 kpatel2s@home.inf.h-brs.de"
-
 # Show git branch name
 force_color_prompt=yes
 color_prompt=yes
@@ -260,7 +158,3 @@ else
  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch)\$ '
 fi
 unset color_prompt force_color_prompt
-
-
-# my catkin workspace
-#source ~/work/catkin_ws/devel/setup.bash
