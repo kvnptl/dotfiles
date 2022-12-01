@@ -35,7 +35,6 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# TERM=xterm-256color
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
@@ -44,8 +43,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-force_color_prompt=yes
-
+#force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -58,16 +56,8 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-# get the name of current branch
-parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-# git branch | grep '\*' | awk '{print ($2)}'
-}
-
-triangle=$'\uE0B0'
 if [ "$color_prompt" = yes ]; then
-    # PS1="\[\033[1;44m\][ \W ]\[\033[0;44;33m\]\$(parse_git_branch) \[\033[0;34m\]$triangle\[\e[0m\] "
-    PS1="\[\033[1;44m\][ \W ]\[\033[0;44;33m\]\$(parse_git_branch)\[\033[0;34m\]\[\e[0m\] "
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -95,7 +85,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -126,38 +116,45 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Import colorscheme from 'wal' asynchronously
-cat ~/.cache/wal/sequences; clear
 
-# added by Anaconda3 installer
-#export PATH="/home/dharmin/anaconda3/bin:$PATH"
-# source /home/dharmin/anaconda3/etc/profile.d/conda.sh
+# <<< Below commands added by user Kevin Patel >>>
 
-# ROS stuff 
-source /opt/ros/kinetic/setup.bash
-source ~/catkin_ws/devel/setup.bash
-# source ~/catkin_workspace/devel/setup.bash
-# source ~/study/sem3/catkin_ws/devel/setup.bash
-export ROBOT_ENV=brsu-c025-sim
-# export ROBOT_ENV=single-room
-# export ROBOT_ENV=double-room
-export ROBOT=youbot-brsu-1
+# combine cd and ls functions
+function cdls(){
+    cd "$@" && ls
+}
 
-# using hsl solver for spline based motion planner
-# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/dharmin/omg-tools/coinhsl-linux-x86_64/lib
+#ROS 1 and ROS 2 environment setup
+source /opt/ros/noetic/setup.bash
+#source ~/ros2_foxy/install/local_setup.bash
 
-# lejos path (lego brick)
-# export NXJ_HOME=/opt/leJOS_NXJ_0.9.1beta-3
-# export LEJOS_NXT_JAA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-# export PATH=/opt/leJOS_NXJ_0.9.1beta-3:$PATH
+# >>> conda initialize >>>
+# The base environment is not activated by default
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/kvnptl/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/kvnptl/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/kvnptl/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/kvnptl/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
 
-# gradle (multi agent)
-export PATH=$PATH:/opt/gradle/gradle-4.10.2/bin
+conda config --set auto_activate_base False
+# <<< conda initialize <<<
 
-# vi command compatible
-set -o vi
-
-export RANGER_LOAD_DEFAULT_RC=FALSE
-VISUAL=vim; export VISUAL EDITOR=vim; export EDITOR
-# neofetch on start
-neofetch --source ~/.config/neofetch/batman3
+# Show git branch name
+force_color_prompt=yes
+color_prompt=yes
+parse_git_branch() {
+ git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+if [ "$color_prompt" = yes ]; then
+ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;31m\]$(parse_git_branch)\[\033[00m\]\$ '
+else
+ PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch)\$ '
+fi
+unset color_prompt force_color_prompt
