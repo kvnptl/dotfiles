@@ -119,17 +119,23 @@ fi
 
 # <<< Below commands added by user Kevin Patel >>>
 
+# source bashaliases
+source $HOME/.bashaliases
+
 # combine cd and ls functions
 function cdls(){
     cd "$@" && ls
 }
 
 #ROS 1 and ROS 2 environment setup
+
 source /opt/ros/noetic/setup.bash
+
 #source ~/ros2_foxy/install/local_setup.bash
 
 # >>> conda initialize >>>
 # The base environment is not activated by default
+
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/kvnptl/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
@@ -158,3 +164,6 @@ else
  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch)\$ '
 fi
 unset color_prompt force_color_prompt
+
+# my catkin workspace
+#source ~/work/catkin_ws/devel/setup.bash
