@@ -119,9 +119,6 @@ fi
 
 # <<< Below commands added by user Kevin Patel >>>
 
-# source bashaliases
-source $HOME/.bashaliases
-
 # combine cd and ls functions
 function cdls(){
     cd "$@" && ls
