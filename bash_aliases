@@ -57,20 +57,12 @@ alias yb2="ssh -X robocup@192.168.1.114"
 alias yb4="ssh -X robocup@192.168.1.142"
 alias yb3="ssh -X robocup@192.168.1.116"
 alias youbot_export="export ROS_MASTER_URI=http://192.168.1.114:11311"
+alias yb2_eth="ssh -X robocup@192.168.1.138"
+alias anylabel="conda activate anylabeling && anylabeling"
+
 # to access at-work lab PC from home
+alias tuni_hbrs_vpn='tmux new -A -s uni_hbrs_vpn'
 alias uni_work_station_access="sudo openvpn ~/Documents/HBRS_vpn/client.conf"
-# kinova robot
-alias kinova_connect="ssh -X mas-demo@192.168.1.11"
-alias kinova_export="export ROS_MASTER_URI=http://192.168.1.11:11311"
-alias robothon="cd ~/work/b_it_bots/robothon_ws"
-
-# HEART-MET project
-alias heartmet="cd ~/work/heart_met_competition/heart_met_ws"
-alias lucy_ws="cd ~/work/lucy_ws"
-alias lucy_export="export ROS_MASTER_URI=http://192.168.50.201:11311 && export ROS_IP=192.168.50.52"#alias lucy_export_ethernet="export ROS_MASTER_URI=http://10.255.255.1:11311 && export ROS_IP=192.168.50.52"
-alias lucy_connect="ssh -X lucy@192.168.50.201"
-alias lucy_connect_ethernet="ssh -X lucy@10.255.255.1"
-alias lucy_laptop_export="export ROS_MASTER_URI=http://192.168.0.216:11311 && export ROS_IP=192.168.0.217"
-
-# For AgRobotics lab at UniBonn
-alias agrobot="ssh -X kevin@131.220.173.98 && sshfs kevin@131.220.173.98:/home/kevin/kevin /home/kvnptl/work/agrobotics_unibonn/cube1"
+alias work_lab_cluster="ssh -X kpatel2s@10.20.118.78"
+alias work_lab_cluster-folders="sshfs kpatel2s@10.20.118.78:/home/kpatel2s/kpatel2s /home/kvnptl/HBRS/cloud_drive_mounts/uni_hbrs_work_lab_gpu"
+alias work_lab_cluster-folders-datasets="sshfs kpatel2s@10.20.118.78:/srv/disk1/datasets/kpatel2s_datasets /home/kvnptl/HBRS/cloud_drive_mounts/uni_hbrs_work_lab_gpu_datasets"
