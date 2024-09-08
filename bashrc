@@ -119,6 +119,10 @@ fi
 
 # <<< Below commands added by user Kevin Patel >>>
 
+if [ -f ~/.bash_completion ]; then
+    . ~/.bash_completion
+fi
+
 # combine cd and ls functions
 function cdls(){
     cd "$@" && ls
@@ -126,7 +130,7 @@ function cdls(){
 
 #ROS 1 and ROS 2 environment setup
 
-source /opt/ros/noetic/setup.bash
+#source /opt/ros/noetic/setup.bash
 
 #source ~/ros2_foxy/install/local_setup.bash
 
@@ -149,14 +153,32 @@ unset __conda_setup
 conda config --set auto_activate_base False
 # <<< conda initialize <<<
 
+CONDA_ROOT=~/anaconda3   # <- set to your Anaconda/Miniconda installation directory
+if [[ -r $CONDA_ROOT/etc/profile.d/bash_completion.sh ]]; then
+    source $CONDA_ROOT/etc/profile.d/bash_completion.sh
+else
+    echo "WARNING: could not find conda-bash-completion setup script"
+fi
+
 # Show git branch name
+
+# Show git branch name only if ahead of remote
+ahead_of_remote() {
+  local ahead="$(git rev-list @{u}.. 2>&1 | wc -l)"
+  if [ $ahead -gt 0 ]; then
+    echo "++"; 
+  fi  
+}
+
+
 force_color_prompt=yes
 color_prompt=yes
 parse_git_branch() {
  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 if [ "$color_prompt" = yes ]; then
- PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;31m\]$(parse_git_branch)\[\033[00m\]\$ '
+ #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;31m\]$(parse_git_branch)\[\033[00m\]\$ '
+ PS1='\[\033[01;32m\]\W\[\033[01;31m\]$(__git_ps1 " (%s$(ahead_of_remote))")\[\033[00m\]\$'
 else
  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch)\$ '
 fi
@@ -164,3 +186,13 @@ unset color_prompt force_color_prompt
 
 # my catkin workspace
 #source ~/work/catkin_ws/devel/setup.bash
+
+
+if [[ -n $SSH_CONNECTION ]]; then
+    echo "SSH Connection: hello"
+fi
+
+# ROS 2 Humble
+source /opt/ros/humble/setup.bash
+source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
+source ~/work/ros2_ws/install/setup.bash
